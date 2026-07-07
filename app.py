@@ -18,6 +18,7 @@ from src.embeddings.embed_data import EmbedData
 from src.indexing.milvus_vdb import MilvusVDB
 from src.retrieval.retriever_rerank import Retriever
 from src.generation.rag import RAG
+from src.generation.llm_factory import get_llm_api_key, get_llm_api_key_env_name, get_llm_provider
 from src.workflows.agent_workflow import ParalegalAgentWorkflow
 from pypdf import PdfReader
 from dotenv import load_dotenv
@@ -158,7 +159,6 @@ def initialize_workflow(file_path: str):
             st.info("🤖 Setting up RAG system...")
             rag_system = RAG(
                 retriever=retriever,
-                llm_model=settings.llm_model,
                 temperature=settings.temperature,
                 max_tokens=settings.max_tokens
             )
@@ -170,7 +170,7 @@ def initialize_workflow(file_path: str):
                 retriever=retriever,
                 rag_system=rag_system,
                 firecrawl_api_key=settings.firecrawl_api_key or os.getenv("FIRECRAWL_API_KEY"),
-                openai_api_key=settings.openai_api_key or os.getenv("OPENAI_API_KEY")
+                openai_api_key=get_llm_api_key()
             )
             
             st.success("🎉 Workflow setup completed!")
@@ -207,13 +207,22 @@ with st.sidebar:
     
     # st.subheader("API Keys")
     # openai_key = st.text_input("OpenAI API Key", type="password", value=os.getenv("OPENAI_API_KEY", ""))
+    llm_provider = get_llm_provider()
+    llm_api_key_env = get_llm_api_key_env_name()
+    llm_key = st.text_input(
+        f"{llm_provider.upper()} API Key",
+        type="password",
+        value=get_llm_api_key(),
+    )
     ollama_model = st.text_input("Ollama Model", value="gpt-oss:20b")
     firecrawl_key = st.text_input("Firecrawl API Key", type="password", value=os.getenv("FIRECRAWL_API_KEY", ""))
     
     # if openai_key:
         # os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
         # st.success("✅ OpenAI API Key set!")
-    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+    if llm_key:
+        os.environ[llm_api_key_env] = llm_key
+        st.success("✅ LLM API Key set!")
     if firecrawl_key:
         os.environ["FIRECRAWL_API_KEY"] = firecrawl_key
         st.success("✅ Firecrawl API Key set!")
@@ -325,8 +334,8 @@ if prompt := st.chat_input("Ask a question about your document..."):
         st.error("⚠️ Please upload a document first to initialize the workflow.")
         st.stop()
     
-    if not os.getenv("OPENAI_API_KEY"):
-        st.error("⚠️ Please set your OpenAI API key in the sidebar.")
+    if not get_llm_api_key():
+        st.error("⚠️ Please set your LLM API key in the sidebar.")
         st.stop()
     
     # Add user message to chat history

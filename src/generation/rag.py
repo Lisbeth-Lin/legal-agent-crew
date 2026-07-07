@@ -1,8 +1,8 @@
 from typing import Optional
 from loguru import logger
-from crewai import LLM
 from pydantic import BaseModel
 from src.retrieval.retriever_rerank import Retriever
+from src.generation.llm_factory import create_llm, get_active_llm_model, get_llm_api_key
 from config.settings import settings
 
 class ChatMessage(BaseModel):
@@ -19,8 +19,8 @@ class RAG:
         max_tokens: int = None
     ):
         self.retriever = retriever
-        self.llm_model = llm_model or settings.llm_model
-        self.openai_api_key = openai_api_key or settings.openai_api_key
+        self.llm_model = llm_model or get_active_llm_model()
+        self.openai_api_key = get_llm_api_key(openai_api_key)
         self.temperature = temperature or settings.temperature
         self.max_tokens = max_tokens or settings.max_tokens
         
@@ -50,10 +50,10 @@ class RAG:
     def _setup_llm(self):
         if not self.openai_api_key:
             raise ValueError(
-                "OpenAI API key is required. Set OPENAI_API_KEY environment variable "
+                "LLM API key is required. Set the provider-specific API key in environment variables "
                 "or pass openai_api_key parameter."
             )
-        llm = LLM(model=self.llm_model, api_key=self.openai_api_key, temperature=self.temperature)
+        llm = create_llm(model=self.llm_model, api_key=self.openai_api_key, temperature=self.temperature, max_tokens=self.max_tokens)
         logger.info(f"Initialized CrewAI LLM with model: {self.llm_model}")
         return llm
 
