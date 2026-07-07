@@ -1,6 +1,5 @@
 from typing import Optional, Any
 from loguru import logger
-from crewai import LLM
 from crewai.flow.flow import Flow, start, listen, router, or_
 from pydantic import BaseModel
 
@@ -8,6 +7,7 @@ from .events import RetrieveEvent, EvaluateEvent, WebSearchEvent, SynthesizeEven
 from src.tools.firecrawl_search_tool import FirecrawlSearchTool
 from src.retrieval.retriever_rerank import Retriever
 from src.generation.rag import RAG
+from src.generation.llm_factory import create_llm, get_llm_api_key
 from config.settings import settings
 
 # Prompt templates for workflow steps
@@ -91,8 +91,8 @@ class ParalegalAgentWorkflow(Flow[ParalegalAgentState]):
         self.retriever = retriever
         self.rag = rag_system
 
-        self.openai_api_key = openai_api_key or settings.openai_api_key
-        self.llm = LLM(model=settings.llm_model, api_key=self.openai_api_key, temperature=0.1)
+        self.openai_api_key = get_llm_api_key(openai_api_key)
+        self.llm = create_llm(api_key=self.openai_api_key, temperature=0.1)
 
     @start()
     def retrieve(self) -> RetrieveEvent:

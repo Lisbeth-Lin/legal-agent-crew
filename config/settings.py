@@ -1,15 +1,20 @@
 import os
 from pathlib import Path
+from typing import Optional
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     # API Keys
-    openai_api_key: str
-    firecrawl_api_key: str
+    openai_api_key: Optional[str] = ""
+    firecrawl_api_key: Optional[str] = ""
+    qwen_api_key: Optional[str] = ""
     
     # Model Configuration
+    llm_provider: str = "qwen"
     embedding_model: str = "BAAI/bge-large-en-v1.5"
     llm_model: str = "gpt-3.5-turbo"
+    qwen_model: str = "qwen-plus"
+    qwen_base_url: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
     vector_dim: int = 1024
     
     # Retrieval Configuration
