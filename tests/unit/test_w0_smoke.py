@@ -11,7 +11,7 @@ def test_pyproject_declares_current_project() -> None:
     pyproject = tomllib.loads((REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert pyproject["project"]["name"] == "paralegal-agent"
-    assert pyproject["project"]["requires-python"] == ">=3.13"
+    assert pyproject["project"]["requires-python"] == ">=3.13,<3.14"
 
 
 @pytest.mark.unit

@@ -1,10 +1,10 @@
 # 04 - Implementation Blueprint：Agentic RAG 国际公法研究助手
 
-> 项目：**PublicLaw Research Agent**  
-> 文档用途：Codex 主 Agent 的开发启动指令、依赖顺序、分工协议与质量门禁  
-> 输入基线：`01-proposal.md`、`02-detailed_design.md`、`03-vibe-coding-task/`  
-> 默认回答：English，IRAC + Sources  
-> 执行模式：主 Agent 编排，子 Agent 按边界实现；全过程可恢复、可验证、可追踪  
+> 项目：**PublicLaw Research Agent**
+> 文档用途：Codex 主 Agent 的开发启动指令、依赖顺序、分工协议与质量门禁
+> 输入基线：`01-proposal.md`、`02-detailed_design.md`、`03-vibe-coding-task/`
+> 默认回答：English，IRAC + Sources
+> 执行模式：主 Agent 编排，子 Agent 按边界实现；全过程可恢复、可验证、可追踪
 > 版本：2026-07-10
 
 本文件不是新的需求文档。它负责把现有需求、详细设计和 24 个任务文件转换为可执行开发计划。启动开发时，应把本文件作为主入口，并继续以三个输入源作为功能与设计依据。

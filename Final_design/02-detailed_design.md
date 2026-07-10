@@ -1,14 +1,14 @@
 # 02 - Detailed Design：Agentic RAG 国际公法研究助手
 
-> 项目名称：**Agentic RAG 国际公法研究助手**  
-> 英文代号：**PublicLaw Research Agent**  
-> 输入文档：`01-proposal.md`  
-> 输出文档：`02-detailed_design.md`  
-> 文档类型：详细设计文档 / Detailed Design  
-> 版本定位：基于现有原型升级到最终版系统  
-> 前端形态：FastAPI 后端 + Streamlit 演示前端  
-> 默认回答语言：English  
-> 默认回答格式：IRAC + Sources  
+> 项目名称：**Agentic RAG 国际公法研究助手**
+> 英文代号：**PublicLaw Research Agent**
+> 输入文档：`01-proposal.md`
+> 输出文档：`02-detailed_design.md`
+> 文档类型：详细设计文档 / Detailed Design
+> 版本定位：基于现有原型升级到最终版系统
+> 前端形态：FastAPI 后端 + Streamlit 演示前端
+> 默认回答语言：English
+> 默认回答格式：IRAC + Sources
 
 ---
 
