@@ -1,0 +1,13 @@
+ragas:
+  enabled: false
+  metrics:
+    - faithfulness
+    - answer_relevance
+    - context_precision
+    - context_recall
+custom_metrics:
+  citation_accuracy: true
+  paragraph_match_rate: true
+  source_grounding_rate: true
+  unsupported_claim_rate: true
+  fallback_trigger_accuracy: true

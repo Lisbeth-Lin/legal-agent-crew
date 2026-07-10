@@ -1,0 +1,11 @@
+llm:
+  provider: qwen
+  model: qwen-plus
+  base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  temperature: 0.2
+  max_tokens: 1200
+embedding:
+  model: BAAI/bge-m3
+  vector_dim: 1024
+reranker:
+  model: BAAI/bge-reranker-v2-m3

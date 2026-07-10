@@ -1,0 +1,15 @@
+query_classifier:
+  version: v1
+  template: "Classify the public international law query into a supported task type."
+query_rewrite:
+  version: v1
+  template: "Rewrite the query for legal retrieval without adding facts."
+answerability:
+  version: v1
+  template: "Decide whether the evidence is sufficient to answer."
+legal_reasoning:
+  version: v1
+  template: "Answer in English using IRAC and cite only provided sources."
+citation_verifier:
+  version: v1
+  template: "Verify that each citation anchor exists and supports the claim."

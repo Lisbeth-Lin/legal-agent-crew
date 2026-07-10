@@ -1,0 +1,5 @@
+database_url: sqlite:///./data/publiclaw-dev.db
+pool_pre_ping: true
+echo_sql: false
+milvus_uri: ./data/milvus_binary.db
+elasticsearch_url: http://localhost:9200
