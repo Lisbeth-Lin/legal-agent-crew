@@ -1,0 +1,9 @@
+bm25_top_k: 20
+dense_top_k: 20
+rerank_top_k: 8
+rrf_k: 60
+score_threshold: 0.0
+metadata_filters:
+  legal_domain: null
+  document_type: null
+  institution: null

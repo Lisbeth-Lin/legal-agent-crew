@@ -1,0 +1,13 @@
+trusted_domains:
+  - icj-cij.org
+  - un.org
+  - wto.org
+  - italaw.com
+source_priority:
+  official: 1
+  academic: 2
+  user_configured: 3
+blocked_domains: []
+institution_mapping:
+  ICJ: icj-cij.org
+  WTO: wto.org

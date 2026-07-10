@@ -91,3 +91,16 @@ This paralegal AI assistant combines multiple technologies to provide intelligen
 - **Workflow Management**: CrewAI-powered agentic workflows for complex query handling
 
 The system provides an interactive Streamlit interface where users can upload PDF documents, ask questions, and receive comprehensive answers with citations and sources. It automatically determines when to use document knowledge versus web search to provide the most accurate and complete responses.
+
+## W1 Foundation Layout
+
+The final architecture is being introduced under `app/` while the existing Streamlit prototype remains at `app.py`.
+
+- `app/main.py` exposes the FastAPI application and `/health`.
+- `app/core/` owns configuration, response contracts, exceptions, and trace context.
+- `app/db/` owns SQLAlchemy metadata, sessions, and business tables.
+- `app/repositories/` and `app/services/` provide the first repository, task, and logging contracts.
+- `app/llm/` defines the shared LLM provider protocol plus deterministic test provider.
+- `config/*.yaml` contains non-secret application configuration; secrets stay in `.env`.
+
+W1 does not move or delete the legacy prototype. Streamlit migration to HTTP-only frontend behavior remains a later task.

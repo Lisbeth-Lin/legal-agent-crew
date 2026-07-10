@@ -1,0 +1,8 @@
+max_pdf_size_mb: 100
+allowed_extensions:
+  - .pdf
+allowed_mime_types:
+  - application/pdf
+cors_origins:
+  - http://localhost:8501
+rate_limit_per_minute: 60

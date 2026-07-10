@@ -1,0 +1,5 @@
+name: PublicLaw Research Agent
+environment: development
+api_prefix: /api
+log_level: INFO
+enable_langfuse: false
